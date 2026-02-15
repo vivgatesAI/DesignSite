@@ -276,25 +276,54 @@ function WebsitePreview({
   const getPreviewLayout = () => {
     const id = style?.id || mixed?.id || '';
     
-    if (id.includes('minimal') || id.includes('swiss')) {
-      return 'minimal';
-    } else if (id.includes('brutalist')) {
-      return 'brutalist';
-    } else if (id.includes('cyber') || id.includes('futur')) {
-      return 'cyber';
-    } else if (id.includes('glass')) {
-      return 'glass';
-    } else if (id.includes('editorial') || id.includes('typographic')) {
-      return 'editorial';
-    } else if (id.includes('maximal') || id.includes('psychedelic')) {
-      return 'maximal';
-    } else if (id.includes('retro')) {
-      return 'retro';
-    } else if (id.includes('handcraft') || id.includes('organic')) {
-      return 'organic';
-    }
+    // Map each specific style to its own layout
+    const layoutMap: Record<string, string> = {
+      // Classic styles
+      'swiss': 'swiss',
+      'modernism': 'modernism',
+      'bauhaus': 'bauhaus',
+      'midcentury': 'midcentury',
+      'minimalism': 'minimalism',
+      'editorial': 'editorial',
+      // Contemporary
+      'flat': 'flat',
+      'material': 'material',
+      'neumorphism': 'neumorphism',
+      'glassmorphism': 'glass',
+      'brutalist': 'brutalist',
+      'cleanui': 'cleanui',
+      // Typography
+      'typographic': 'typographic',
+      'swisstypography': 'swisstypography',
+      'experimental': 'experimental',
+      'editorialmax': 'editorialmax',
+      // Expressive
+      'maximalism': 'maximal',
+      'psychedelic': 'psychedelic',
+      'surrealism': 'surrealism',
+      'collage': 'collage',
+      'illustrative': 'illustrative',
+      // Tech
+      'futurism': 'futurism',
+      'cyberpunk': 'cyberpunk',
+      'data': 'data',
+      'algorithmic': 'algorithmic',
+      // Brand
+      'luxury': 'luxury',
+      'corporate': 'corporate',
+      'playful': 'playful',
+      'handcrafted': 'handcrafted',
+      'retro': 'retro',
+      // Mixed
+      'swiss-glass': 'swiss-glass',
+      'brutal-cyber': 'brutal-cyber',
+      'minimal-luxury': 'minimal-luxury',
+      'editorial-max': 'editorial-max',
+      'retro-futurism': 'retro-futurism',
+      'nature-tech': 'nature-tech'
+    };
     
-    return 'default';
+    return layoutMap[id] || 'default';
   };
 
   const layout = getPreviewLayout();
@@ -307,71 +336,157 @@ function WebsitePreview({
       '--dark': colors[3] || '#000',
       '--light': colors[4] || '#fff',
     } as React.CSSProperties}>
-      {/* Minimal Layout */}
-      {layout === 'minimal' && (
-        <div className="preview-minimal">
-          <nav className="preview-nav">
-            <span className="logo">Brand</span>
-            <div className="links">
-              <span>Work</span>
-              <span>About</span>
-              <span>Contact</span>
+      {/* SWISS - Asymmetric grid, red accent */}
+      {layout === 'swiss' && (
+        <div className="preview-swiss">
+          <div className="swiss-grid">
+            <div className="swiss-block swiss-red" style={{background: colors[0]}}></div>
+            <div className="swiss-block swiss-large">
+              <span className="swiss-title">OBJECTIVE</span>
+              <span className="swiss-sub">CLARITY</span>
             </div>
-          </nav>
-          <div className="hero-minimal">
-            <h1>Less is<br/>more.</h1>
-          </div>
-          <div className="content-grid">
-            <div className="content-block"></div>
-            <div className="content-block"></div>
-            <div className="content-block"></div>
+            <div className="swiss-block swiss-text">Helvetica</div>
+            <div className="swiss-block swiss-img"></div>
           </div>
         </div>
       )}
 
-      {/* Brutalist Layout */}
-      {layout === 'brutalist' && (
-        <div className="preview-brutalist">
-          <div className="brutalist-header">RAW DESIGN</div>
-          <h1 className="brutalist-title">NOT<br/>SORRY</h1>
-          <div className="brutalist-blocks">
-            <div className="b-block" style={{background: colors[0]}}></div>
-            <div className="b-block" style={{background: colors[1]}}></div>
-            <div className="b-block" style={{background: colors[2]}}></div>
+      {/* MODERNISM - Pure function, no decoration */}
+      {layout === 'modernism' && (
+        <div className="preview-modernism">
+          <div className="mod-hero">
+            <div className="mod-line"></div>
+            <h1 className="mod-title">FORM</h1>
+            <p className="mod-follows">FOLLOWS FUNCTION</p>
+            <div className="mod-line"></div>
+          </div>
+          <div className="mod-blocks">
+            <div className="mod-block"></div>
+            <div className="mod-block mod-tall"></div>
+            <div className="mod-block"></div>
           </div>
         </div>
       )}
 
-      {/* Cyber Layout */}
-      {layout === 'cyber' && (
-        <div className="preview-cyber">
-          <div className="cyber-grid"></div>
-          <nav className="cyber-nav">
-            <span className="cyber-logo">◈ SYSTEM</span>
-            <div className="cyber-links">
-              <span>//home</span>
-              <span>//data</span>
-              <span>//connect</span>
+      {/* BAUHAUS - Geometric, primary colors */}
+      {layout === 'bauhaus' && (
+        <div className="preview-bauhaus">
+          <div className="bauhaus-circle" style={{background: colors[0]}}></div>
+          <div className="bauhaus-triangle"></div>
+          <div className="bauhaus-rect" style={{background: colors[1]}}></div>
+          <div className="bauhaus-text">BAUHAUS</div>
+        </div>
+      )}
+
+      {/* MID-CENTURY - Warm, organic curves */}
+      {layout === 'midcentury' && (
+        <div className="preview-midcentury">
+          <div className="mc-shape mc-blob"></div>
+          <div className="mc-content">
+            <h2 className="mc-title">Organic<br/>Modern</h2>
+            <div className="mc-chair"></div>
+          </div>
+        </div>
+      )}
+
+      {/* MINIMALISM - Extreme whitespace */}
+      {layout === 'minimalism' && (
+        <div className="preview-minimalism">
+          <div className="min-content">
+            <h1 className="min-title">less</h1>
+            <div className="min-divider"></div>
+            <p className="min-sub">is more</p>
+          </div>
+        </div>
+      )}
+
+      {/* EDITORIAL - Magazine layout */}
+      {layout === 'editorial' && (
+        <div className="preview-editorial">
+          <div className="ed-mast">Vogue</div>
+          <div className="ed-hero">
+            <h1 className="ed-title">The Art<br/>of Fashion</h1>
+            <div className="ed-sidebar">
+              <div className="ed-line"></div>
+              <div className="ed-line short"></div>
             </div>
-          </nav>
-          <div className="cyber-hero">
-            <span className="cyber-text">FUTURE</span>
-            <span className="cyber-text glow">LOADING</span>
-          </div>
-          <div className="cyber-bars">
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
           </div>
         </div>
       )}
 
-      {/* Glass Layout */}
+      {/* FLAT - No depth, simple shapes */}
+      {layout === 'flat' && (
+        <div className="preview-flat">
+          <div className="flat-nav">
+            <span className="flat-logo">☰</span>
+            <div className="flat-icons">
+              <span className="flat-icon" style={{background: colors[0]}}></span>
+              <span className="flat-icon" style={{background: colors[1]}}></span>
+              <span className="flat-icon" style={{background: colors[2]}}></span>
+            </div>
+          </div>
+          <div className="flat-cards">
+            <div className="flat-card" style={{background: colors[0]}}>
+              <span className="flat-symbol">★</span>
+            </div>
+            <div className="flat-card" style={{background: colors[1]}}>
+              <span className="flat-symbol">♥</span>
+            </div>
+            <div className="flat-card" style={{background: colors[2]}}>
+              <span className="flat-symbol">◆</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MATERIAL - Elevated cards, shadows */}
+      {layout === 'material' && (
+        <div className="preview-material">
+          <div className="mat-fab" style={{background: colors[0]}}>+</div>
+          <div className="mat-cards">
+            <div className="mat-card mat-elevated">
+              <div className="mat-header" style={{background: colors[0]}}></div>
+              <div className="mat-body">
+                <div className="mat-line"></div>
+                <div className="mat-line short"></div>
+              </div>
+            </div>
+            <div className="mat-card">
+              <div className="mat-header" style={{background: colors[1]}}></div>
+              <div className="mat-body">
+                <div className="mat-line"></div>
+                <div className="mat-line short"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* NEUMORPHISM - Soft shadows */}
+      {layout === 'neumorphism' && (
+        <div className="preview-neumorphism">
+          <div className="neu-container">
+            <div className="neu-btn neu-pressed">✓</div>
+            <div className="neu-slider">
+              <div className="neu-thumb"></div>
+            </div>
+            <div className="neu-card">
+              <div className="neu-avatar"></div>
+              <div className="neu-lines">
+                <div className="neu-line"></div>
+                <div className="neu-line short"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* GLASS - Frosted transparency */}
       {layout === 'glass' && (
         <div className="preview-glass">
           <div className="glass-bg-shapes">
-            <div className="shape s1"></div>
-            <div className="shape s2"></div>
+            <div className="shape s1" style={{background: colors[0]}}></div>
+            <div className="shape s2" style={{background: colors[1]}}></div>
           </div>
           <div className="glass-card">
             <div className="glass-header">
@@ -389,72 +504,283 @@ function WebsitePreview({
         </div>
       )}
 
-      {/* Editorial Layout */}
-      {layout === 'editorial' && (
-        <div className="preview-editorial">
-          <div className="editorial-masthead">MAGAZINE</div>
-          <h1 className="editorial-title">THE ART<br/>OF DESIGN</h1>
-          <div className="editorial-content">
-            <div className="ec-main"></div>
-            <div className="ec-side">
-              <div className="ec-line"></div>
-              <div className="ec-line"></div>
-              <div className="ec-line"></div>
-            </div>
+      {/* BRUTALIST - Raw, harsh */}
+      {layout === 'brutalist' && (
+        <div className="preview-brutalist">
+          <div className="brutalist-header" style={{background: colors[0], color: colors[2] || '#fff'}}>!! WARNING !!</div>
+          <h1 className="brutalist-title">RAW<br/>DATA</h1>
+          <div className="brutalist-blocks">
+            <div className="b-block" style={{background: colors[0]}}></div>
+            <div className="b-block" style={{background: colors[1]}}></div>
+            <div className="b-block" style={{background: colors[2]}}></div>
+          </div>
+          <div className="brutalist-marquee">
+            <span>NO DESIGN IS GOOD DESIGN NO DESIGN IS GOOD DESIGN</span>
           </div>
         </div>
       )}
 
-      {/* Maximal Layout */}
+      {/* CLEAN UI - Apple-like minimal */}
+      {layout === 'cleanui' && (
+        <div className="preview-cleanui">
+          <nav className="clean-nav">
+            <span className="clean-logo">Brand</span>
+            <div className="clean-links">
+              <span>Product</span>
+              <span>Features</span>
+              <span>Pricing</span>
+            </div>
+          </nav>
+          <div className="clean-hero">
+            <h1 className="clean-title">Simple.</h1>
+            <p className="clean-sub">Beautifully minimal.</p>
+            <button className="clean-btn">Learn more →</button>
+          </div>
+        </div>
+      )}
+
+      {/* TYPOGRAPHIC - Type as hero */}
+      {layout === 'typographic' && (
+        <div className="preview-typographic">
+          <div className="typ-letters">
+            <span className="typ-letter" style={{color: colors[0]}}>A</span>
+            <span className="typ-letter" style={{color: colors[1]}}>a</span>
+            <span className="typ-letter" style={{color: colors[2]}}>!</span>
+          </div>
+          <div className="typ-text">
+            <h1 className="typ-headline">TYPOGRAPHY<br/>IS THE DESIGN</h1>
+          </div>
+        </div>
+      )}
+
+      {/* SWISS TYPOGRAPHY - Grid-based type */}
+      {layout === 'swisstypography' && (
+        <div className="preview-swisstypography">
+          <div className="st-grid">
+            <div className="st-item st-red" style={{background: colors[0]}}></div>
+            <div className="st-item st-text">
+              <span className="st-helv">HELVETICA</span>
+            </div>
+            <div className="st-item st-large">NEUE</div>
+            <div className="st-item st-num">57</div>
+          </div>
+        </div>
+      )}
+
+      {/* EXPERIMENTAL - Broken, expressive */}
+      {layout === 'experimental' && (
+        <div className="preview-experimental">
+          <div className="exp-text exp-rotated" style={{color: colors[0]}}>BROKEN</div>
+          <div className="exp-text exp-offset" style={{color: colors[1]}}>GRID</div>
+          <div className="exp-shape"></div>
+          <div className="exp-text exp-small">experimental</div>
+        </div>
+      )}
+
+      {/* EDITORIAL MAX - Oversized type */}
+      {layout === 'editorialmax' && (
+        <div className="preview-editorialmax">
+          <h1 className="edmax-title">
+            <span className="edmax-line1" style={{color: colors[0]}}>BIG</span>
+            <span className="edmax-line2" style={{color: colors[1]}}>TYPE</span>
+          </h1>
+          <div className="edmax-small">oversized and dramatic</div>
+        </div>
+      )}
+
+      {/* MAXIMALISM - Bold, chaotic */}
       {layout === 'maximal' && (
         <div className="preview-maximal">
           <div className="max-shapes">
-            <div className="m-shape s1"></div>
-            <div className="m-shape s2"></div>
-            <div className="m-shape s3"></div>
-            <div className="m-shape s4"></div>
-            <div className="m-shape s5"></div>
+            <div className="m-shape s1" style={{background: colors[0]}}></div>
+            <div className="m-shape s2" style={{background: colors[1]}}></div>
+            <div className="m-shape s3" style={{background: colors[2]}}></div>
+            <div className="m-shape s4" style={{background: colors[3]}}></div>
+            <div className="m-shape s5" style={{background: colors[4]}}></div>
           </div>
-          <h1 className="max-title">EVERYTHING<br/>EVERYWHERE</h1>
+          <h1 className="max-title">MORE<br/>IS MORE</h1>
         </div>
       )}
 
-      {/* Retro Layout */}
+      {/* PSYCHEDELIC - Flowing gradients */}
+      {layout === 'psychedelic' && (
+        <div className="preview-psychedelic">
+          <div className="psy-bg"></div>
+          <div className="psy-waves">
+            <div className="psy-wave" style={{borderColor: colors[0]}}></div>
+            <div className="psy-wave" style={{borderColor: colors[1]}}></div>
+            <div className="psy-wave" style={{borderColor: colors[2]}}></div>
+          </div>
+          <h1 className="psy-title">TRIPPY</h1>
+        </div>
+      )}
+
+      {/* SURREALISM - Dreamlike juxtapositions */}
+      {layout === 'surrealism' && (
+        <div className="preview-surrealism">
+          <div className="surr-moon"></div>
+          <div className="surr-eye" style={{borderColor: colors[0]}}></div>
+          <div className="surr-cloud" style={{background: colors[1]}}></div>
+          <div className="surr-text">DREAM</div>
+        </div>
+      )}
+
+      {/* COLLAGE - Cut and paste */}
+      {layout === 'collage' && (
+        <div className="preview-collage">
+          <div className="col-piece col-torn" style={{background: colors[0]}}></div>
+          <div className="col-piece col-photo"></div>
+          <div className="col-piece col-text" style={{background: colors[1]}}>
+            <span>COPY</span>
+          </div>
+          <div className="col-piece col-tape"></div>
+        </div>
+      )}
+
+      {/* ILLUSTRATIVE - Hand-drawn feel */}
+      {layout === 'illustrative' && (
+        <div className="preview-illustrative">
+          <div className="ill-scene">
+            <div className="ill-sun"></div>
+            <div className="ill-hill"></div>
+            <div className="ill-tree">
+              <div className="ill-trunk"></div>
+              <div className="ill-leaves"></div>
+            </div>
+          </div>
+          <h2 className="ill-title">Hello World!</h2>
+        </div>
+      )}
+
+      {/* FUTURISM - Tech, neon */}
+      {layout === 'futurism' && (
+        <div className="preview-futurism">
+          <div className="fut-grid"></div>
+          <div className="fut-hud">
+            <div className="fut-ring" style={{borderColor: colors[0]}}></div>
+            <div className="fut-ring inner" style={{borderColor: colors[1]}}></div>
+          </div>
+          <div className="fut-text">2077</div>
+        </div>
+      )}
+
+      {/* CYBERPUNK - Neon, glitch */}
+      {layout === 'cyberpunk' && (
+        <div className="preview-cyberpunk">
+          <div className="cyb-grid"></div>
+          <div className="cyb-lines">
+            <div className="cyb-line" style={{background: colors[0]}}></div>
+            <div className="cyb-line" style={{background: colors[1]}}></div>
+          </div>
+          <h1 className="cyb-title">
+            <span className="cyb-glitch" style={{color: colors[0]}}>NEON</span>
+            <span className="cyb-glitch" style={{color: colors[1]}}>CITY</span>
+          </h1>
+        </div>
+      )}
+
+      {/* DATA - Charts, infographics */}
+      {layout === 'data' && (
+        <div className="preview-data">
+          <div className="data-chart">
+            <div className="data-bar" style={{height: '60%', background: colors[0]}}></div>
+            <div className="data-bar" style={{height: '80%', background: colors[1]}}></div>
+            <div className="data-bar" style={{height: '45%', background: colors[2]}}></div>
+            <div className="data-bar" style={{height: '90%', background: colors[3]}}></div>
+          </div>
+          <div className="data-pie" style={{background: `conic-gradient(${colors[0]} 0deg 90deg, ${colors[1]} 90deg 180deg, ${colors[2]} 180deg 270deg, ${colors[3]} 270deg)`}}></div>
+        </div>
+      )}
+
+      {/* ALGORITHMIC - Generative, procedural */}
+      {layout === 'algorithmic' && (
+        <div className="preview-algorithmic">
+          <div className="algo-grid">
+            {Array.from({length: 16}).map((_, i) => (
+              <div 
+                key={i} 
+                className="algo-cell"
+                style={{
+                  background: i % 3 === 0 ? colors[0] : i % 2 === 0 ? colors[1] : colors[2],
+                  opacity: 0.3 + (i % 5) * 0.15
+                }}
+              ></div>
+            ))}
+          </div>
+          <div className="algo-text">GEN-01</div>
+        </div>
+      )}
+
+      {/* LUXURY - Premium, exclusive */}
+      {layout === 'luxury' && (
+        <div className="preview-luxury">
+          <div className="lux-crest">✦</div>
+          <h1 className="lux-title">MAISON</h1>
+          <p className="lux-sub">Since 1894</p>
+          <div className="lux-line"></div>
+        </div>
+      )}
+
+      {/* CORPORATE - Safe, professional */}
+      {layout === 'corporate' && (
+        <div className="preview-corporate">
+          <nav className="corp-nav">
+            <span className="corp-logo">◆ ACME Corp</span>
+            <div className="corp-menu">Solutions | About | Contact</div>
+          </nav>
+          <div className="corp-hero">
+            <h1 className="corp-title">Enterprise Solutions</h1>
+            <div className="corp-blocks">
+              <div className="corp-block" style={{background: colors[0]}}></div>
+              <div className="corp-block" style={{background: colors[1]}}></div>
+              <div className="corp-block" style={{background: colors[2]}}></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* PLAYFUL - Friendly, rounded */}
+      {layout === 'playful' && (
+        <div className="preview-playful">
+          <div className="play-shapes">
+            <div className="play-shape" style={{background: colors[0]}}></div>
+            <div className="play-shape" style={{background: colors[1]}}></div>
+            <div className="play-shape" style={{background: colors[2]}}></div>
+          </div>
+          <h1 className="play-title">Yay!</h1>
+          <div className="play-btn" style={{background: colors[0]}}>Start</div>
+        </div>
+      )}
+
+      {/* HANDCRAFTED - Organic, imperfect */}
+      {layout === 'handcrafted' && (
+        <div className="preview-handcrafted">
+          <div className="hand-stamp">HANDMADE</div>
+          <div className="hand-paper">
+            <h2 className="hand-title">Artisan</h2>
+            <div className="hand-line wavy"></div>
+            <div className="hand-line"></div>
+          </div>
+        </div>
+      )}
+
+      {/* RETRO - 70s/80s vibes */}
       {layout === 'retro' && (
         <div className="preview-retro">
-          <div className="retro-header">
-            <span className="retro-logo">☮ PEACE</span>
+          <div className="ret-sun">
+            <div className="ret-stripes"></div>
           </div>
-          <div className="retro-content">
-            <div className="retro-card r1">
-              <div className="retro-img"></div>
-              <div className="retro-text"></div>
-            </div>
-            <div className="retro-card r2">
-              <div className="retro-img"></div>
-              <div className="retro-text"></div>
-            </div>
-          </div>
-          <div className="retro-footer">Est. 1974</div>
-        </div>
-      )}
-
-      {/* Organic Layout */}
-      {layout === 'organic' && (
-        <div className="preview-organic">
-          <div className="organic-shape"></div>
-          <nav className="organic-nav">
-            <span className="leaf-icon">🌿</span>
-            <span className="organic-brand">Nature</span>
-          </nav>
-          <div className="organic-hero">
-            <div className="organic-circle"></div>
-            <h1>From<br/>Earth</h1>
+          <h1 className="ret-title">COOL</h1>
+          <div className="ret-grid">
+            <div className="ret-square" style={{background: colors[0]}}></div>
+            <div className="ret-square" style={{background: colors[1]}}></div>
+            <div className="ret-square" style={{background: colors[2]}}></div>
+            <div className="ret-square" style={{background: colors[3]}}></div>
           </div>
         </div>
       )}
 
-      {/* Default/Standard Layout */}
+      {/* DEFAULT fallback */}
       {layout === 'default' && (
         <div className="preview-default">
           <nav className="preview-nav">
