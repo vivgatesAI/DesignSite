@@ -437,7 +437,7 @@ function WebsitePreview({
   const layout = getPreviewLayout();
 
   // Use the mockup images with carousel for ALL styles that have images generated
-  const generatedStyles = ['swiss', 'modernism', 'bauhaus', 'midcentury', 'minimalism', 'editorial', 'flat', 'material', 'neumorphism', 'glassmorphism', 'brutalist', 'cleanui', 'typographic', 'swisstypography', 'experimental', 'editorialmax', 'maximalism', 'psychedelic', 'surrealism', 'collage', 'illustrative', 'futurism', 'cyberpunk', 'terminal', 'data', 'algorithmic', 'luxury', 'corporate', 'playful', 'handcrafted', 'retro'];
+  const generatedStyles = ['swiss', 'modernism', 'bauhaus', 'midcentury', 'minimalism', 'editorial', 'flat', 'material', 'neumorphism', 'glassmorphism', 'brutalist', 'cleanui', 'typographic', 'swisstypography', 'experimental', 'editorialmax', 'maximalism', 'psychedelic', 'surrealism', 'collage', 'illustrative', 'futurism', 'cyberpunk', 'terminal', 'data', 'algorithmic', 'luxury', 'corporate', 'playful', 'handcrafted', 'retro', 'swiss-glass', 'brutal-cyber', 'minimal-luxury', 'editorial-max', 'retro-futurism', 'nature-tech'];
   const hasMockup = generatedStyles.includes(styleId) || (mixed ? generatedStyles.includes(mixed.id) : false);
   
   // If we have mockup images, show them - skip the layout-specific HTML
