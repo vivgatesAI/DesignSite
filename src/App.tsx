@@ -337,6 +337,11 @@ function WebsitePreview({
   mixed?: typeof mixedStyles[0];
   activeModel?: 'nano_banana_pro' | 'recraft_v4';
 }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const minSwipeDistance = 50;
+  
   const colors = mixed ? mixed.colors : style!.colors;
   const fonts = style?.fonts || { display: 'Arial', body: 'Arial' };
   const category = style?.category || 'brand';
@@ -345,6 +350,34 @@ function WebsitePreview({
   // Check if mockup image exists
   const mockupImageNano = `/mockups/${styleId}_nano_banana_pro.png`;
   const mockupImageRecraft = `/mockups/${styleId}_recraft_v4.png`;
+  
+  // Sync slide with activeModel prop
+  useEffect(() => {
+    setCurrentSlide(activeModel === 'recraft_v4' ? 1 : 0);
+  }, [activeModel]);
+  
+  // Touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+  
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) {
+      setCurrentSlide(prev => Math.min(prev + 1, 1));
+    }
+    if (isRightSwipe) {
+      setCurrentSlide(prev => Math.max(prev - 1, 0));
+    }
+  };
   
   // Generate different preview layouts based on style characteristics
   const getPreviewLayout = () => {
@@ -409,8 +442,6 @@ function WebsitePreview({
   const hasMockup = generatedStyles.includes(styleId) || (mixed && generatedStyles.includes(mixed.id));
   
   if (hasMockup || layout === 'fullsite' || (!layout)) {
-    const currentImage = activeModel === 'nano_banana_pro' ? mockupImageNano : mockupImageRecraft;
-    
     return (
       <div className="preview-fullsite" style={{ 
         '--primary': colors[0],
@@ -426,7 +457,6 @@ function WebsitePreview({
           <button 
             className={`model-btn ${activeModel === 'nano_banana_pro' ? 'active' : ''}`}
             onClick={() => {
-              // Update parent state via custom event
               window.dispatchEvent(new CustomEvent('setActiveModel', { detail: 'nano_banana_pro' }));
             }}
           >
@@ -442,34 +472,32 @@ function WebsitePreview({
           </button>
         </div>
         
-        {/* Mockup Image */}
-        <div className="mockup-container">
-          <img 
-            src={currentImage} 
-            alt={`${style?.name || 'Style'} website mockup`}
-            className="mockup-image"
-            onError={(e) => {
-              // Fallback to HTML preview if image fails
-              (e.target as HTMLImageElement).style.display = 'none';
-              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-            }}
-          />
-          {/* Fallback HTML preview (hidden by default, shown if image fails) */}
-          <div className="mockup-fallback hidden">
-            <nav className="fs-nav">
-              <span className="fs-logo">BrandName</span>
-              <div className="fs-links">
-                <span>Features</span>
-                <span>Pricing</span>
-                <span>About</span>
-                <span>Contact</span>
-              </div>
-              <button className="fs-cta">Get Started</button>
-            </nav>
-            <section className="fs-hero">
-              <h1 className="fs-hero-title">Build Something Amazing Today</h1>
-              <p className="fs-hero-sub">The modern solution for your business.</p>
-            </section>
+        {/* Swipeable Mockup Carousel */}
+        <div className="mockup-carousel" onTouchStart={(e) => handleTouchStart(e)} onTouchMove={(e) => handleTouchMove(e)} onTouchEnd={handleTouchEnd}>
+          <div className="carousel-track" style={{ transform: `translateX(${-currentSlide * 100}%)` }}>
+            <div className="carousel-slide">
+              <img 
+                src={mockupImageNano} 
+                alt={`${style?.name || 'Style'} - Nano Banana Pro`}
+                className="mockup-image"
+                draggable={false}
+              />
+              <div className="slide-label">Nano Banana Pro</div>
+            </div>
+            <div className="carousel-slide">
+              <img 
+                src={mockupImageRecraft} 
+                alt={`${style?.name || 'Style'} - Recraft V4`}
+                className="mockup-image"
+                draggable={false}
+              />
+              <div className="slide-label">Recraft V4</div>
+            </div>
+          </div>
+          {/* Swipe Indicators */}
+          <div className="swipe-indicators">
+            <span className={`indicator ${currentSlide === 0 ? 'active' : ''}`} onClick={() => setCurrentSlide(0)}></span>
+            <span className={`indicator ${currentSlide === 1 ? 'active' : ''}`} onClick={() => setCurrentSlide(1)}></span>
           </div>
         </div>
       </div>
