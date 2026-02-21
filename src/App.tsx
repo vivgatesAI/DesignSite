@@ -6,6 +6,7 @@ function App() {
   const [activeStyle, setActiveStyle] = useState<string>('swiss');
   const [activeCategory, setActiveCategory] = useState<string>('classic');
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
+  const [activeModel, setActiveModel] = useState<'nano_banana_pro' | 'recraft_v4'>('nano_banana_pro');
 
   const filteredStyles = activeCategory === 'mixed' 
     ? [] 
@@ -89,6 +90,7 @@ function App() {
             style={currentStyle} 
             onCopyColor={handleCopyColor}
             copiedColor={copiedColor}
+            activeModel={activeModel}
           />
         )}
 
@@ -107,11 +109,13 @@ function App() {
 function StyleDisplay({ 
   style, 
   onCopyColor, 
-  copiedColor 
+  copiedColor,
+  activeModel
 }: { 
   style: DesignStyle; 
   onCopyColor: (c: string) => void;
   copiedColor: string | null;
+  activeModel?: 'nano_banana_pro' | 'recraft_v4';
 }) {
   return (
     <div className="style-display">
@@ -213,7 +217,7 @@ The design should feel: ${style.mood}`;
               </div>
               <div className="browser-url">{style.exampleWebsite.toLowerCase().replace(/\s+/g, '-')}.com</div>
             </div>
-            <WebsitePreview style={style} />
+            <WebsitePreview style={style} activeModel={activeModel} />
           </div>
           <p className="preview-caption">Best for: <strong>{style.exampleWebsite}</strong></p>
         </div>
@@ -326,14 +330,21 @@ This hybrid style blends: ${mixed.parentStyles.join(' + ')}`;
 
 function WebsitePreview({ 
   style, 
-  mixed 
+  mixed,
+  activeModel = 'nano_banana_pro'
 }: { 
   style?: DesignStyle; 
   mixed?: typeof mixedStyles[0];
+  activeModel?: 'nano_banana_pro' | 'recraft_v4';
 }) {
   const colors = mixed ? mixed.colors : style!.colors;
   const fonts = style?.fonts || { display: 'Arial', body: 'Arial' };
   const category = style?.category || 'brand';
+  const styleId = style?.id || mixed?.id || '';
+  
+  // Check if mockup image exists
+  const mockupImageNano = `/mockups/${styleId}_nano_banana_pro.png`;
+  const mockupImageRecraft = `/mockups/${styleId}_recraft_v4.png`;
   
   // Generate different preview layouts based on style characteristics
   const getPreviewLayout = () => {
@@ -392,8 +403,12 @@ function WebsitePreview({
 
   const layout = getPreviewLayout();
 
-  // For styles without specific layouts, use a comprehensive full-site preview
+  // For styles without specific layouts, use the mockup images with model selector
   if (layout === 'fullsite' || (!layout)) {
+    const currentImage = activeModel === 'nano_banana_pro' ? mockupImageNano : mockupImageRecraft;
+    const hasNanoImage = true; // Images will be generated
+    const hasRecraftImage = true;
+    
     return (
       <div className="preview-fullsite" style={{ 
         '--primary': colors[0],
@@ -404,63 +419,57 @@ function WebsitePreview({
         '--font-display': fonts.display,
         '--font-body': fonts.body,
       } as React.CSSProperties}>
-        {/* Navigation */}
-        <nav className="fs-nav">
-          <span className="fs-logo">BrandName</span>
-          <div className="fs-links">
-            <span>Features</span>
-            <span>Pricing</span>
-            <span>About</span>
-            <span>Contact</span>
-          </div>
-          <button className="fs-cta">Get Started</button>
-        </nav>
+        {/* Model Selector */}
+        <div className="model-selector">
+          <button 
+            className={`model-btn ${activeModel === 'nano_banana_pro' ? 'active' : ''}`}
+            onClick={() => {
+              // Update parent state via custom event
+              window.dispatchEvent(new CustomEvent('setActiveModel', { detail: 'nano_banana_pro' }));
+            }}
+          >
+            Nano Banana Pro
+          </button>
+          <button 
+            className={`model-btn ${activeModel === 'recraft_v4' ? 'active' : ''}`}
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent('setActiveModel', { detail: 'recraft_v4' }));
+            }}
+          >
+            Recraft V4
+          </button>
+        </div>
         
-        {/* Hero */}
-        <section className="fs-hero">
-          <h1 className="fs-hero-title">Build Something Amazing Today</h1>
-          <p className="fs-hero-sub">The modern solution for your business. Fast, reliable, and beautifully designed.</p>
-          <div className="fs-hero-btns">
-            <button className="fs-btn-primary">Start Free Trial</button>
-            <button className="fs-btn-secondary">Watch Demo</button>
+        {/* Mockup Image */}
+        <div className="mockup-container">
+          <img 
+            src={currentImage} 
+            alt={`${style?.name || 'Style'} website mockup`}
+            className="mockup-image"
+            onError={(e) => {
+              // Fallback to HTML preview if image fails
+              (e.target as HTMLImageElement).style.display = 'none';
+              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+            }}
+          />
+          {/* Fallback HTML preview (hidden by default, shown if image fails) */}
+          <div className="mockup-fallback hidden">
+            <nav className="fs-nav">
+              <span className="fs-logo">BrandName</span>
+              <div className="fs-links">
+                <span>Features</span>
+                <span>Pricing</span>
+                <span>About</span>
+                <span>Contact</span>
+              </div>
+              <button className="fs-cta">Get Started</button>
+            </nav>
+            <section className="fs-hero">
+              <h1 className="fs-hero-title">Build Something Amazing Today</h1>
+              <p className="fs-hero-sub">The modern solution for your business.</p>
+            </section>
           </div>
-        </section>
-        
-        {/* Features */}
-        <section className="fs-features">
-          <div className="fs-feature-card">
-            <div className="fs-feature-icon">⚡</div>
-            <h3>Lightning Fast</h3>
-            <p>Performance that scales with your business needs.</p>
-          </div>
-          <div className="fs-feature-card">
-            <div className="fs-feature-icon">🔒</div>
-            <h3>Secure by Default</h3>
-            <p>Enterprise-grade security built in from the start.</p>
-          </div>
-          <div className="fs-feature-card">
-            <div className="fs-feature-icon">🎯</div>
-            <h3>Made for You</h3>
-            <p>Designed to match your workflow perfectly.</p>
-          </div>
-        </section>
-        
-        {/* CTA */}
-        <section className="fs-cta-section">
-          <h2>Ready to get started?</h2>
-          <p>Join thousands of satisfied customers today.</p>
-          <button className="fs-btn-primary">Start Your Free Trial</button>
-        </section>
-        
-        {/* Footer */}
-        <footer className="fs-footer">
-          <div className="fs-footer-brand">BrandName © 2026</div>
-          <div className="fs-footer-links">
-            <span>Privacy</span>
-            <span>Terms</span>
-            <span>Contact</span>
-          </div>
-        </footer>
+        </div>
       </div>
     );
   }
