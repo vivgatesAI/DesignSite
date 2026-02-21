@@ -438,7 +438,7 @@ function WebsitePreview({
 
   // Use the mockup images with model selector for ALL styles that have images generated
   // Check if we have mockup images for this style (we've generated 5 styles so far)
-  const generatedStyles = ['swiss', 'modernism', 'bauhaus', 'midcentury', 'minimalism', 'editorial', 'flat', 'material'];
+  const generatedStyles = ['swiss', 'modernism', 'bauhaus', 'midcentury', 'minimalism', 'editorial', 'flat', 'material', 'neumorphism', 'glassmorphism', 'brutalist', 'cleanui', 'typographic', 'swisstypography', 'experimental', 'editorialmax', 'maximalism', 'psychedelic', 'surrealism', 'collage', 'illustrative', 'futurism', 'cyberpunk', 'terminal', 'data', 'algorithmic', 'luxury', 'corporate', 'playful', 'handcrafted', 'retro'];
   const hasMockup = generatedStyles.includes(styleId) || (mixed && generatedStyles.includes(mixed.id));
   
   if (hasMockup || layout === 'fullsite' || (!layout)) {
