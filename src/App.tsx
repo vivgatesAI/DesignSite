@@ -171,6 +171,38 @@ function StyleDisplay({
               ))}
             </div>
           </section>
+
+          <section className="info-section prompt-section">
+            <h3>AI Image Prompt</h3>
+            <p className="prompt-hint">Copy this prompt for AI image generators</p>
+            <div className="prompt-box">
+              <pre>{`Create a webpage in ${style.name} style. ${style.description} 
+
+Use these colors: ${style.colors.join(', ')}
+Typography: ${style.fonts.display} for headlines, ${style.fonts.body} for body text.
+
+Key elements: ${style.characteristics.join(', ')}.
+
+The design should feel: ${style.mood}`}</pre>
+            </div>
+            <button 
+              className="copy-prompt-btn"
+              onClick={() => {
+                const prompt = `Create a webpage in ${style.name} style. ${style.description} 
+
+Use these colors: ${style.colors.join(', ')}
+Typography: ${style.fonts.display} for headlines, ${style.fonts.body} for body text.
+
+Key elements: ${style.characteristics.join(', ')}.
+
+The design should feel: ${style.mood}`;
+                navigator.clipboard.writeText(prompt);
+                alert('Prompt copied to clipboard!');
+              }}
+            >
+              📋 Copy Prompt
+            </button>
+          </section>
         </div>
 
         <div className="preview-panel">
@@ -243,6 +275,36 @@ function MixedStyleDisplay({
               ))}
             </div>
           </section>
+
+          <section className="info-section prompt-section">
+            <h3>AI Image Prompt</h3>
+            <p className="prompt-hint">Copy this prompt for AI image generators</p>
+            <div className="prompt-box">
+              <pre>{`Create a webpage combining ${mixed.name}. 
+
+${mixed.description}
+
+Use these colors: ${mixed.colors.join(', ')}
+
+This hybrid style blends: ${mixed.parentStyles.join(' + ')}`}</pre>
+            </div>
+            <button 
+              className="copy-prompt-btn"
+              onClick={() => {
+                const prompt = `Create a webpage combining ${mixed.name}. 
+
+${mixed.description}
+
+Use these colors: ${mixed.colors.join(', ')}
+
+This hybrid style blends: ${mixed.parentStyles.join(' + ')}`;
+                navigator.clipboard.writeText(prompt);
+                alert('Prompt copied to clipboard!');
+              }}
+            >
+              📋 Copy Prompt
+            </button>
+          </section>
         </div>
 
         <div className="preview-panel">
@@ -306,6 +368,7 @@ function WebsitePreview({
       // Tech
       'futurism': 'futurism',
       'cyberpunk': 'cyberpunk',
+      'terminal': 'terminal',
       'data': 'data',
       'algorithmic': 'algorithmic',
       // Brand
@@ -676,6 +739,33 @@ function WebsitePreview({
             <span className="cyb-glitch" style={{color: colors[0]}}>NEON</span>
             <span className="cyb-glitch" style={{color: colors[1]}}>CITY</span>
           </h1>
+        </div>
+      )}
+
+      {/* TERMINAL - AI Command Center */}
+      {layout === 'terminal' && (
+        <div className="preview-terminal">
+          <div className="term-status">
+            <span className="term-dot"></span>
+            <span>SYSTEM ONLINE</span>
+          </div>
+          <div className="term-header">
+            <span className="term-title">DRISHTI // AI COMMAND CENTER</span>
+            <span className="term-build">v2.0.14</span>
+          </div>
+          <div className="term-readouts">
+            <span>Neural Stream: <strong>ACTIVE</strong></span>
+            <span>Agent Swarm: <strong>READY</strong></span>
+          </div>
+          <div className="term-prompt">
+            <span className="term-prompt-symbol">{">"}</span>
+            <span className="term-prompt-text">Enter command...</span>
+            <span className="term-cursor">█</span>
+          </div>
+          <div className="term-logs">
+            <div className="term-log">IDLE — Waiting for signals...</div>
+            <div className="term-log">Neural Stream Active</div>
+          </div>
         </div>
       )}
 

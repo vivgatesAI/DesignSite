@@ -381,6 +381,57 @@ body {
   color: var(--text-secondary);
 }
 
+/* PROMPT SECTION */
+.prompt-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.prompt-hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.prompt-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.prompt-box pre {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.copy-prompt-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--accent) 0%, #ff8f5a 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copy-prompt-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+}
+
 .parent-styles {
   display: flex;
   flex-wrap: wrap;
@@ -1655,6 +1706,84 @@ body {
   text-align: center;
 }
 .cyb-glitch { display: block; font-size: 36px; font-weight: 900; text-shadow: 2px 0 var(--secondary), -2px 0 var(--primary); }
+
+/* TERMINAL / AI COMMAND CENTER */
+.preview-terminal {
+  height: 100%;
+  background: #000;
+  padding: 20px;
+  font-family: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+  color: #00ff41;
+  position: relative;
+}
+.preview-terminal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,65,0.03) 2px, rgba(0,255,65,0.03) 4px);
+  pointer-events: none;
+}
+.term-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 15px;
+}
+.term-dot {
+  width: 6px;
+  height: 6px;
+  background: #00ff41;
+  border-radius: 50%;
+  animation: term-pulse 2s infinite;
+}
+@keyframes term-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.term-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #00ffff;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #1a1a1a;
+}
+.term-readouts {
+  display: flex;
+  gap: 20px;
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 20px;
+}
+.term-readouts strong { color: #00ff41; }
+.term-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+.term-prompt-symbol { color: #00ffff; }
+.term-prompt-text { color: #666; }
+.term-cursor {
+  animation: term-blink 1s infinite;
+  color: #00ffff;
+}
+@keyframes term-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.term-logs {
+  font-size: 10px;
+  color: #444;
+}
+.term-log { margin-bottom: 8px; }
 
 /* DATA */
 .preview-data {
