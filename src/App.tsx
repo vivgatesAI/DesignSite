@@ -333,6 +333,7 @@ function WebsitePreview({
 }) {
   const colors = mixed ? mixed.colors : style!.colors;
   const fonts = style?.fonts || { display: 'Arial', body: 'Arial' };
+  const category = style?.category || 'brand';
   
   // Generate different preview layouts based on style characteristics
   const getPreviewLayout = () => {
@@ -386,10 +387,83 @@ function WebsitePreview({
       'nature-tech': 'nature-tech'
     };
     
-    return layoutMap[id] || 'default';
+    return layoutMap[id] || 'fullsite';
   };
 
   const layout = getPreviewLayout();
+
+  // For styles without specific layouts, use a comprehensive full-site preview
+  if (layout === 'fullsite' || (!layout)) {
+    return (
+      <div className="preview-fullsite" style={{ 
+        '--primary': colors[0],
+        '--secondary': colors[1] || colors[0],
+        '--accent': colors[2] || colors[0],
+        '--dark': colors[3] || '#000',
+        '--light': colors[4] || '#fff',
+        '--font-display': fonts.display,
+        '--font-body': fonts.body,
+      } as React.CSSProperties}>
+        {/* Navigation */}
+        <nav className="fs-nav">
+          <span className="fs-logo">BrandName</span>
+          <div className="fs-links">
+            <span>Features</span>
+            <span>Pricing</span>
+            <span>About</span>
+            <span>Contact</span>
+          </div>
+          <button className="fs-cta">Get Started</button>
+        </nav>
+        
+        {/* Hero */}
+        <section className="fs-hero">
+          <h1 className="fs-hero-title">Build Something Amazing Today</h1>
+          <p className="fs-hero-sub">The modern solution for your business. Fast, reliable, and beautifully designed.</p>
+          <div className="fs-hero-btns">
+            <button className="fs-btn-primary">Start Free Trial</button>
+            <button className="fs-btn-secondary">Watch Demo</button>
+          </div>
+        </section>
+        
+        {/* Features */}
+        <section className="fs-features">
+          <div className="fs-feature-card">
+            <div className="fs-feature-icon">⚡</div>
+            <h3>Lightning Fast</h3>
+            <p>Performance that scales with your business needs.</p>
+          </div>
+          <div className="fs-feature-card">
+            <div className="fs-feature-icon">🔒</div>
+            <h3>Secure by Default</h3>
+            <p>Enterprise-grade security built in from the start.</p>
+          </div>
+          <div className="fs-feature-card">
+            <div className="fs-feature-icon">🎯</div>
+            <h3>Made for You</h3>
+            <p>Designed to match your workflow perfectly.</p>
+          </div>
+        </section>
+        
+        {/* CTA */}
+        <section className="fs-cta-section">
+          <h2>Ready to get started?</h2>
+          <p>Join thousands of satisfied customers today.</p>
+          <button className="fs-btn-primary">Start Your Free Trial</button>
+        </section>
+        
+        {/* Footer */}
+        <footer className="fs-footer">
+          <div className="fs-footer-brand">BrandName © 2026</div>
+          <div className="fs-footer-links">
+            <span>Privacy</span>
+            <span>Terms</span>
+            <span>Contact</span>
+          </div>
+        </footer>
+      </div>
+    );
+  }
 
   return (
     <div className={`website-preview ${layout}`} style={{ 
