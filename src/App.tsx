@@ -403,11 +403,13 @@ function WebsitePreview({
 
   const layout = getPreviewLayout();
 
-  // For styles without specific layouts, use the mockup images with model selector
-  if (layout === 'fullsite' || (!layout)) {
+  // Use the mockup images with model selector for ALL styles that have images generated
+  // Check if we have mockup images for this style (we've generated 5 styles so far)
+  const generatedStyles = ['swiss', 'modernism', 'bauhaus', 'midcentury', 'minimalism', 'editorial', 'flat', 'material'];
+  const hasMockup = generatedStyles.includes(styleId) || (mixed && generatedStyles.includes(mixed.id));
+  
+  if (hasMockup || layout === 'fullsite' || (!layout)) {
     const currentImage = activeModel === 'nano_banana_pro' ? mockupImageNano : mockupImageRecraft;
-    const hasNanoImage = true; // Images will be generated
-    const hasRecraftImage = true;
     
     return (
       <div className="preview-fullsite" style={{ 
