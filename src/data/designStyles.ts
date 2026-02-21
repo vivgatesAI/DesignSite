@@ -270,6 +270,17 @@ export const designStyles: DesignStyle[] = [
     mood: "Edgy, Dystopian, Electric"
   },
   {
+    id: "terminal",
+    name: "Terminal / AI Command Center",
+    category: "tech",
+    description: "Futuristic, minimal, terminal-inspired UI that resembles an AI command center. Dark high-contrast aesthetic with system status language and HUD-like elements.",
+    colors: ["#000000", "#00FF41", "#00FFFF", "#0066FF", "#0A0A0A"],
+    fonts: { display: "JetBrains Mono", body: "IBM Plex Mono" },
+    characteristics: ["Dark background", "Neon green/cyan text", "Monospace fonts", "System status language", "Scanline effects", "Blinking cursor"],
+    exampleWebsite: "AI Dashboard",
+    mood: "Tech, Operational, Futuristic"
+  },
+  {
     id: "data",
     name: "Data-Driven / Infographic",
     category: "tech",
