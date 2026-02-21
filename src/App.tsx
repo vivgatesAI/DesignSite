@@ -452,26 +452,6 @@ function WebsitePreview({
         '--font-display': fonts.display,
         '--font-body': fonts.body,
       } as React.CSSProperties}>
-        {/* Model Selector */}
-        <div className="model-selector">
-          <button 
-            className={`model-btn ${activeModel === 'nano_banana_pro' ? 'active' : ''}`}
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent('setActiveModel', { detail: 'nano_banana_pro' }));
-            }}
-          >
-            Nano Banana Pro
-          </button>
-          <button 
-            className={`model-btn ${activeModel === 'recraft_v4' ? 'active' : ''}`}
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent('setActiveModel', { detail: 'recraft_v4' }));
-            }}
-          >
-            Recraft V4
-          </button>
-        </div>
-        
         {/* Swipeable Mockup Carousel */}
         <div className="mockup-carousel" onTouchStart={(e) => handleTouchStart(e)} onTouchMove={(e) => handleTouchMove(e)} onTouchEnd={handleTouchEnd}>
           <div className="carousel-track" style={{ transform: `translateX(${-currentSlide * 100}%)` }}>
@@ -482,7 +462,6 @@ function WebsitePreview({
                 className="mockup-image"
                 draggable={false}
               />
-              <div className="slide-label">Nano Banana Pro</div>
             </div>
             <div className="carousel-slide">
               <img 
@@ -491,7 +470,6 @@ function WebsitePreview({
                 className="mockup-image"
                 draggable={false}
               />
-              <div className="slide-label">Recraft V4</div>
             </div>
           </div>
           {/* Swipe Indicators */}
