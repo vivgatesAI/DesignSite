@@ -2303,3 +2303,77 @@ body {
 .indicator:hover {
   background: rgba(255, 255, 255, 0.6);
 }
+
+/* SWIPE ARROWS */
+.swipe-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+  opacity: 0.7;
+}
+
+.swipe-arrow:hover {
+  background: rgba(255, 255, 255, 0.25);
+  opacity: 1;
+}
+
+.swipe-arrow.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.swipe-arrow-left {
+  left: 12px;
+}
+
+.swipe-arrow-right {
+  right: 12px;
+}
+
+.swipe-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* SWIPE HINT */
+.swipe-hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  opacity: 0.8;
+  animation: pulse-hint 2s ease-in-out infinite;
+}
+
+@keyframes pulse-hint {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Hide hint on touch devices after first interaction */
+@media (hover: none) and (pointer: coarse) {
+  .swipe-hint {
+    display: block;
+  }
+}
