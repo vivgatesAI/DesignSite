@@ -246,7 +246,19 @@ export const designStyles: DesignStyle[] = [
     exampleWebsite: "Kids Brand",
     mood: "Warm, Handmade, Friendly"
   },
-  // Tech & Future-Facing
+  
+  // Tech & Future
+  {
+    id: "fintech-dark",
+    name: "Fintech Dark Modern (Lighthouse OS)",
+    category: "tech",
+    description: "A sleek, high-contrast dark mode aesthetic favoring deep navy or almost black backgrounds (#1E2332) offset by vivid gradients (cyan, green, and neon purple accents). Focuses on displaying dense analytical data cleanly with crisp, highly legible geometric sans-serif typography. Built for operating systems, venture capital dashboards, and data-heavy proprietary platforms.",
+    colors: ["#1e2332", "#000000", "#ffffff", "#0693e3", "#00d084"],
+    fonts: { display: "Graphie / Public Sans", body: "Proxima Nova" },
+    characteristics: ["Deep dark backgrounds", "Vivid gradient overlays", "Geometric sans-serif typography", "Data-dense dashboard UI", "Clean whitespace separation"],
+    exampleWebsite: "lighthouse.ai",
+    mood: "Proprietary, Analytical, Prestigious, High-Tech"
+  },-Facing
   {
     id: "futurism",
     name: "Futurism / Sci-Fi UI",
