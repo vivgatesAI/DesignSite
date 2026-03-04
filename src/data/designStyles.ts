@@ -258,7 +258,7 @@ export const designStyles: DesignStyle[] = [
     characteristics: ["Deep dark backgrounds", "Vivid gradient overlays", "Geometric sans-serif typography", "Data-dense dashboard UI", "Clean whitespace separation"],
     exampleWebsite: "lighthouse.ai",
     mood: "Proprietary, Analytical, Prestigious, High-Tech"
-  },-Facing
+  },
   {
     id: "futurism",
     name: "Futurism / Sci-Fi UI",
