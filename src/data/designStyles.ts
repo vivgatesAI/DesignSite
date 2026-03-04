@@ -249,15 +249,15 @@ export const designStyles: DesignStyle[] = [
   
   // Tech & Future
   {
-    id: "fintech-dark",
-    name: "Fintech Dark Modern (Lighthouse OS)",
-    category: "tech",
-    description: "A sleek, high-contrast dark mode aesthetic favoring deep navy or almost black backgrounds (#1E2332) offset by vivid gradients (cyan, green, and neon purple accents). Focuses on displaying dense analytical data cleanly with crisp, highly legible geometric sans-serif typography. Built for operating systems, venture capital dashboards, and data-heavy proprietary platforms.",
-    colors: ["#1e2332", "#000000", "#ffffff", "#0693e3", "#00d084"],
+    id: "cinematic-minimalism",
+    name: "Cinematic Minimalism (Lighthouse)",
+    category: "contemporary",
+    description: "Characterized by full-bleed cinematic photography overlaid with ultra-clean, thin sans-serif typography. Uses immense negative space, sparse navigation, and translucent UI bars to convey prestige, serenity, and institutional trust.",
+    colors: ["#FFFFFF", "#0A192F", "#F8FAFC", "#94A3B8", "#1E293B"],
     fonts: { display: "Graphie / Public Sans", body: "Proxima Nova" },
-    characteristics: ["Deep dark backgrounds", "Vivid gradient overlays", "Geometric sans-serif typography", "Data-dense dashboard UI", "Clean whitespace separation"],
+    characteristics: ["Full-bleed photography", "Translucent UI bars", "Thin geometric sans-serifs", "Immense negative space", "Minimalist navigation"],
     exampleWebsite: "lighthouse.ai",
-    mood: "Proprietary, Analytical, Prestigious, High-Tech"
+    mood: "Prestigious, Serene, Institutional, Trustworthy"
   },
   {
     id: "futurism",
